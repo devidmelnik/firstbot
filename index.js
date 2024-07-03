@@ -1,5 +1,6 @@
 const { Telegraf, Markup } = require('telegraf')
 const { message } = require('telegraf/filters')
+const { createServer } = require('node:http');
 require('dotenv').config()       // подключаем модуль, который будет прятать токен бота
 const module_with_commands= require('./const')
 
@@ -17,3 +18,18 @@ bot.launch()
 // Enable graceful stop
 process.once('SIGINT', () => bot.stop('SIGINT'))
 process.once('SIGTERM', () => bot.stop('SIGTERM'))
+
+
+
+
+const hostname = '0.0.0.0';
+const port = 10000;
+
+const server = createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
+  res.end('');
+});
+
+server.listen(port, hostname, () => console.log(`Port ${10000} is opened`));
+
